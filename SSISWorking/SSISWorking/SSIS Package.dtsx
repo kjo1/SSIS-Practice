@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{3117901F-11C7-4082-A659-DC78414604B9}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{DFB4B62B-F5AC-47CB-90DD-967775CBC89D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -44,49 +44,151 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Multicast"
-              componentClassID="Microsoft.Multicast"
-              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
-              name="Multicast">
+              refId="Package\Data Flow Task\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]"
-                  name="Multicast Input 1">
+                  refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input].Columns[Title]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Title"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]" />
+                  </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 1]"
-                  deleteOutputOnPathDetached="true"
-                  name="Multicast Output 1"
-                  synchronousInputId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Title is Mr]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="RedirectRow"
+                  exclusionGroup="1"
+                  name="Title is Mr"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="RedirectRow">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[REPLACENULL](#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]},"Not Mr.") == "Mr."</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">REPLACENULL(Title,"Not Mr.") == "Mr."</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 2]"
-                  deleteOutputOnPathDetached="true"
-                  name="Multicast Output 2"
-                  synchronousInputId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Title is not Mr]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Title is not Mr"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 3]"
-                  dangling="true"
-                  deleteOutputOnPathDetached="true"
-                  name="Multicast Output 3"
-                  synchronousInputId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]">
+                  refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\OLE DB Destination"
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Mr Table"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="OLE DB Destination"
+              name="Mr Table"
               usesDispositions="true"
               version="4">
               <properties>
@@ -139,7 +241,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  refId="Package\Data Flow Task\Mr Table.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[SSIS SQL Server]"
                   connectionManagerRefId="Package.ConnectionManagers[SSIS SQL Server]"
                   description="The OLE DB runtime connection used to access the database."
@@ -147,129 +249,129 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[CustomerID]"
                       cachedDataType="i2"
                       cachedName="CustomerID"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerID]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NameStyle]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[NameStyle]"
                       cachedDataType="bool"
                       cachedName="NameStyle"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[NameStyle]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Title]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[Title]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="4"
                       cachedName="Title"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompanyName]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[CompanyName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="41"
                       cachedName="CompanyName"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompanyName]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SalesPerson]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[SalesPerson]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="24"
                       cachedName="SalesPerson"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesPerson]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="43"
                       cachedName="EmailAddress"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Phone]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[Phone]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="19"
                       cachedName="Phone"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[First Name]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[First Name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="24"
                       cachedName="First Name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[First Name]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Last Name]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].Columns[Last Name]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="22"
                       cachedName="Last Name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      externalMetadataColumnId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Last Name]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
                       dataType="i2"
                       name="CustomerID" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[NameStyle]"
                       dataType="bool"
                       name="NameStyle" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
                       codePage="1252"
                       dataType="str"
                       length="4"
                       name="Title" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
                       codePage="1252"
                       dataType="str"
                       length="24"
                       name="FirstName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
                       codePage="1252"
                       dataType="str"
                       length="22"
                       name="LastName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
                       codePage="1252"
                       dataType="str"
                       length="41"
                       name="CompanyName" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
                       codePage="1252"
                       dataType="str"
                       length="24"
                       name="SalesPerson" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
                       codePage="1252"
                       dataType="str"
                       length="43"
                       name="EmailAddress" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      refId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
                       codePage="1252"
                       dataType="str"
                       length="19"
@@ -279,235 +381,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Data Flow Task\Mr Table.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Mr Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Mr Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Mr Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Data Flow Task\OLE DB Destination 1"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="OLE DB Destination 1"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Output02]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[SSIS SQL Server]"
-                  connectionManagerRefId="Package.ConnectionManagers[SSIS SQL Server]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CustomerID]"
-                      cachedDataType="i2"
-                      cachedName="CustomerID"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerID]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Title]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="4"
-                      cachedName="Title"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[CompanyName]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="41"
-                      cachedName="CompanyName"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompanyName]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[SalesPerson]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="24"
-                      cachedName="SalesPerson"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesPerson]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="43"
-                      cachedName="EmailAddress"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Phone]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="19"
-                      cachedName="Phone"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[First Name]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="24"
-                      cachedName="First Name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[First Name]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[Last Name]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="22"
-                      cachedName="Last Name"
-                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Last Name]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
-                      codePage="1252"
-                      dataType="str"
-                      length="5"
-                      name="CustomerID" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
-                      codePage="1252"
-                      dataType="str"
-                      length="4"
-                      name="Title" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
-                      codePage="1252"
-                      dataType="str"
-                      length="24"
-                      name="FirstName" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
-                      codePage="1252"
-                      dataType="str"
-                      length="22"
-                      name="LastName" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
-                      codePage="1252"
-                      dataType="str"
-                      length="41"
-                      name="CompanyName" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
-                      codePage="1252"
-                      dataType="str"
-                      length="24"
-                      name="SalesPerson" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
-                      codePage="1252"
-                      dataType="str"
-                      length="43"
-                      name="EmailAddress" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
-                      codePage="1252"
-                      dataType="str"
-                      length="19"
-                      name="Phone" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Mr Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -855,23 +744,241 @@
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\Data Flow Task\Title is not Mr"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Title is not Mr"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Output02]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Title is not Mr.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SSIS SQL Server]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSIS SQL Server]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      cachedDataType="i2"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[CompanyName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="41"
+                      cachedName="CompanyName"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[CompanyName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[SalesPerson]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="24"
+                      cachedName="SalesPerson"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesPerson]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="43"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[Phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="19"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[First Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="24"
+                      cachedName="First Name"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[First Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].Columns[Last Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="22"
+                      cachedName="Last Name"
+                      externalMetadataColumnId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Last Name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="24"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="22"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[CompanyName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="41"
+                      name="CompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[SalesPerson]"
+                      codePage="1252"
+                      dataType="str"
+                      length="24"
+                      name="SalesPerson" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      codePage="1252"
+                      dataType="str"
+                      length="43"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="19"
+                      name="Phone" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Title is not Mr.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Title is not Mr.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Title is not Mr.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Title is not Mr.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Multicast Output 1]"
-              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="Multicast Output 1"
-              startId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 1]" />
-            <path
-              refId="Package\Data Flow Task.Paths[Multicast Output 2]"
-              endId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
-              name="Multicast Output 2"
-              startId="Package\Data Flow Task\Multicast.Outputs[Multicast Output 2]" />
+              refId="Package\Data Flow Task.Paths[Conditional Split Error Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Conditional Split Error Output"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Conditional Split Error Output]" />
             <path
               refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\Multicast.Inputs[Multicast Input 1]"
+              endId="Package\Data Flow Task\Conditional Split.Inputs[Conditional Split Input]"
               name="OLE DB Source Output"
               startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Title is Mr]"
+              endId="Package\Data Flow Task\Mr Table.Inputs[OLE DB Destination Input]"
+              name="Title is Mr"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Title is Mr]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Title is not Mr]"
+              endId="Package\Data Flow Task\Title is not Mr.Inputs[OLE DB Destination Input]"
+              name="Title is not Mr"
+              startId="Package\Data Flow Task\Conditional Split.Outputs[Title is not Mr]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -900,71 +1007,37 @@
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="157,42"
           Id="Package\Data Flow Task\OLE DB Source"
           TopLeft="300,49" />
         <NodeLayout
-          Size="123,42"
-          Id="Package\Data Flow Task\Multicast"
-          TopLeft="315,164" />
+          Size="122,42"
+          Id="Package\Data Flow Task\Mr Table"
+          TopLeft="137,269" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Data Flow Task\Title is not Mr"
+          TopLeft="309,268" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Data Flow Task\Conditional Split"
+          TopLeft="305,145" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="377.5,91">
+          TopLeft="381.5,91">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,73"
+              EndConnector="0,54"
               Start="0,0"
-              End="0,65.5">
+              End="0,46.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,65.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="150,259" />
-        <NodeLayout
-          Size="177,42"
-          Id="Package\Data Flow Task\OLE DB Destination 1"
-          TopLeft="446,265" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Multicast Output 1]"
-          TopLeft="376.5,206">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-138,53"
-              Start="0,0"
-              End="-138,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.5"
-                    Point2="0,26.5"
-                    Point3="-4,26.5" />
-                  <mssgle:LineSegment
-                    End="-134,26.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-134,26.5"
-                    Point2="-138,26.5"
-                    Point3="-138,30.5" />
-                  <mssgle:LineSegment
-                    End="-138,45.5" />
+                    End="0,46.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -974,37 +1047,103 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Multicast Output 2]"
-          TopLeft="395.666666666667,206">
+          Id="Package\Data Flow Task.Paths[Title is Mr]"
+          TopLeft="346.75,187">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="138.833333333333,59"
+              EndConnector="-148.75,82"
               Start="0,0"
-              End="138.833333333333,51.5">
+              End="-148.75,74.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.0545746388443" />
+                    End="0,24.2350515463918" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.0545746388443"
-                    Point2="0,24.0545746388443"
-                    Point3="4,24.0545746388443" />
+                    Point1="0,24.2350515463918"
+                    Point2="0,28.2350515463918"
+                    Point3="-4,28.2350515463918" />
                   <mssgle:LineSegment
-                    End="134.833333333333,24.0545746388443" />
+                    End="-144.75,28.2350515463918" />
                   <mssgle:CubicBezierSegment
-                    Point1="134.833333333333,24.0545746388443"
-                    Point2="138.833333333333,24.0545746388443"
-                    Point3="138.833333333333,28.0545746388443" />
+                    Point1="-144.75,28.2350515463918"
+                    Point2="-148.75,28.2350515463918"
+                    Point3="-148.75,32.2350515463918" />
                   <mssgle:LineSegment
-                    End="138.833333333333,51.5" />
+                    End="-148.75,74.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-105.52234375,33.2350515463918,62.2946875,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Title is not Mr]"
+          TopLeft="383,187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81"
+              Start="0,0"
+              End="0,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-39.88734375,28.75,79.7746875,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="507,269" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Conditional Split Error Output]"
+          TopLeft="422.25,187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.75,82"
+              Start="0,0"
+              End="163.75,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2350515463918" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.2350515463918"
+                    Point2="0,28.2350515463918"
+                    Point3="4,28.2350515463918" />
+                  <mssgle:LineSegment
+                    End="159.75,28.2350515463918" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.75,28.2350515463918"
+                    Point2="163.75,28.2350515463918"
+                    Point3="163.75,32.2350515463918" />
+                  <mssgle:LineSegment
+                    End="163.75,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="7.5199609375,33.2350515463918,148.710078125,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1024,7 +1163,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Data Flow Task\Mr Table">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1037,7 +1176,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination 1">
+    design-time-name="Package\Data Flow Task\Title is not Mr">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
