@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISWorking", "SSISWorking\SSISWorking.dtproj", "{94B8D0BC-2092-468E-9B3A-D10198ADF88B}"
 EndProject
-Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Practice - Extract and Load", "Practice - Extract and Load\Practice - Extract and Load.dtproj", "{84789656-7322-4D09-8A55-64FC52D440B3}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Practice", "Practice - Extract and Load\Practice.dtproj", "{84789656-7322-4D09-8A55-64FC52D440B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
