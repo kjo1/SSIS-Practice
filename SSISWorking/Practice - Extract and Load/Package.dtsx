@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{247DFC6C-61A5-4521-8D2F-B85AD0150B3B}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{6AB974DD-A959-4A03-82A4-16F19306F6DF}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -522,7 +522,8 @@
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="Copy of CustomerID"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]" />
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -548,7 +549,7 @@
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">(DT_I4)#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]}</property>
+                          name="Expression">(DT_I4)#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]}</property>
                         <property
                           containsID="true"
                           dataType="System.String"
@@ -1166,6 +1167,376 @@
               </outputs>
             </component>
             <component
+              refId="Package\Data Flow Task\Merge"
+              componentClassID="Microsoft.Merge"
+              contactInfo="Merge;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple sorted data flows into one sorted data flow. Unlike the Merge Join, all rows flow to the output. For example, combine two sorted lists of customers into a single sorted list. If sorting is not important, use the Union All transformation. "
+              name="Merge"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1]"
+                  name="Merge Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[CustomerIDSort]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerIDSort"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CustomerIDSort]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of NameStyle]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Copy of NameStyle"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of NameStyle]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of Title]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Title"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of FirstName"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of FirstName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of LastName"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of LastName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of CompanyName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of CompanyName"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of CompanyName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of SalesPerson]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of SalesPerson"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of SalesPerson]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of EmailAddress]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of EmailAddress"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of EmailAddress]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 1].Columns[Copy of Phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Copy of Phone"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Phone]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2]"
+                  name="Merge Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[CustomerIDSort]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CustomerIDSort"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CustomerIDSort]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[NameStyle]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NameStyle"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[NameStyle]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[Title]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Title"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[FirstName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[FirstName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[LastName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[LastName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[CompanyName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CompanyName"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CompanyName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[SalesPerson]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SalesPerson"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[SalesPerson]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[EmailAddress]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="EmailAddress"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[EmailAddress]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Merge.Inputs[Merge Input 2].Columns[Phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Phone"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Phone]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1]"
+                  isSorted="true"
+                  name="Merge Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]"
+                      name="Copy of CustomerID"
+                      sortKeyPosition="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]"
+                      name="Copy of NameStyle" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]"
+                      name="Copy of Title" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]"
+                      name="Copy of FirstName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]"
+                      name="Copy of LastName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]"
+                      name="Copy of CompanyName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]"
+                      name="Copy of SalesPerson" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]"
+                      name="Copy of EmailAddress" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]"
+                      name="Copy of Phone" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Data Flow Task\Sort"
               componentClassID="Microsoft.Sort"
               contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
@@ -1194,7 +1565,8 @@
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="Copy of CustomerID"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]">
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1212,7 +1584,7 @@
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="Copy of NameStyle"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1230,7 +1602,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of Title"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1248,7 +1620,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of FirstName"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1266,7 +1638,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of LastName"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1284,7 +1656,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of CompanyName"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1302,7 +1674,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of SalesPerson"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1320,7 +1692,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of EmailAddress"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1338,7 +1710,7 @@
                       cachedDataType="str"
                       cachedLength="255"
                       cachedName="Copy of Phone"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]">
+                      lineageId="Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]">
                       <properties>
                         <property
                           dataType="System.Int32"
@@ -1388,7 +1760,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CustomerID]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1403,7 +1775,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of NameStyle]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1418,7 +1790,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Title]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1433,7 +1805,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of FirstName]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1448,7 +1820,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of LastName]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1463,7 +1835,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of CompanyName]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1478,7 +1850,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of SalesPerson]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1493,7 +1865,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of EmailAddress]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1508,7 +1880,7 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Specifies the lineage identifier of the input column that is associated with this output column."
-                          name="SortColumnId">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]}</property>
+                          name="SortColumnId">#{Package\Data Flow Task\Merge.Outputs[Merge Output 1].Columns[Copy of Phone]}</property>
                       </properties>
                     </outputColumn>
                     <outputColumn
@@ -1531,143 +1903,30 @@
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Union All"
-              componentClassID="Microsoft.UnionAll"
-              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
-              name="Union All"
+              refId="Package\Data Flow Task\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
               version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
-                  name="Union All Input 1">
+                  refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[CustomerID]"
-                      cachedDataType="r8"
-                      cachedName="CustomerID"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CustomerID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[NameStyle]"
-                      cachedDataType="r8"
-                      cachedName="NameStyle"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[NameStyle]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[NameStyle]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Title]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Title"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Title]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Title]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[FirstName]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="FirstName"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[FirstName]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[LastName]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="LastName"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[LastName]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[CompanyName]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="CompanyName"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[CompanyName]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CompanyName]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[SalesPerson]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="SalesPerson"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[SalesPerson]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SalesPerson]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[EmailAddress]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="EmailAddress"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[EmailAddress]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Phone]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Phone"
-                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Phone]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Phone]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of CustomerID]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of CustomerID]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1675,14 +1934,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerID]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of NameStyle]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of NameStyle]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1690,14 +1952,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NameStyle]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of Title]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of Title]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1705,14 +1970,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Title]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of FirstName]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of FirstName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1720,14 +1988,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FirstName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of LastName]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of LastName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1735,14 +2006,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of CompanyName]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of CompanyName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1750,14 +2024,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CompanyName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of SalesPerson]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of SalesPerson]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1765,14 +2042,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SalesPerson]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of EmailAddress]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of EmailAddress]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1780,14 +2060,17 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmailAddress]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 1].Columns[Copy of Phone]"
+                      refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[Copy of Phone]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="255"
@@ -1795,22 +2078,191 @@
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Phone]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CustomerIDSort]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CustomerIDSort]"
+                      name="CustomerIDSort"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CustomerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of NameStyle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of NameStyle]"
+                      name="Copy of NameStyle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NameStyle]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Title]"
+                      name="Copy of Title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Title]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of FirstName]"
+                      name="Copy of FirstName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FirstName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of LastName]"
+                      name="Copy of LastName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of CompanyName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of CompanyName]"
+                      name="Copy of CompanyName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CompanyName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of SalesPerson]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of SalesPerson]"
+                      name="Copy of SalesPerson">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SalesPerson]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of EmailAddress]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of EmailAddress]"
+                      name="Copy of EmailAddress">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EmailAddress]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[Copy of Phone]"
+                      name="Copy of Phone">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Phone]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Sort 2"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 2"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
                 <input
-                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
-                  hasSideEffects="true"
-                  name="Union All Input 2">
+                  refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input]"
+                  name="Sort Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[CustomerID]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[CustomerID]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1818,14 +2270,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomerID]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[NameStyle]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[NameStyle]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1833,14 +2288,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[NameStyle]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Title]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[Title]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1848,14 +2306,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Title]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[FirstName]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[FirstName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1863,14 +2324,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FirstName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[LastName]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[LastName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1878,14 +2342,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[LastName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[CompanyName]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[CompanyName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1893,14 +2360,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyName]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[SalesPerson]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[SalesPerson]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1908,14 +2378,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[SalesPerson]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[EmailAddress]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[EmailAddress]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1923,14 +2396,17 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[EmailAddress]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Data Flow Task\Union All.Inputs[Union All Input 2].Columns[Phone]"
+                      refId="Package\Data Flow Task\Sort 2.Inputs[Sort Input].Columns[Phone]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
@@ -1938,143 +2414,161 @@
                       lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Phone]">
                       <properties>
                         <property
-                          containsID="true"
                           dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]}</property>
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
-                <input
-                  refId="Package\Data Flow Task\Union All.Inputs[Union All Input 3]"
-                  dangling="true"
-                  hasSideEffects="true"
-                  name="Union All Input 3">
-                  <externalMetadataColumns />
-                </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]"
-                  name="Union All Output 1">
+                  refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerID]"
-                      dataType="r8"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CustomerID]"
-                      name="CustomerID" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[NameStyle]"
-                      dataType="r8"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[NameStyle]"
-                      name="NameStyle" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Title]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Title]"
-                      name="Title" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[FirstName]"
-                      name="FirstName" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[LastName]"
-                      name="LastName" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CompanyName]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[CompanyName]"
-                      name="CompanyName" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SalesPerson]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[SalesPerson]"
-                      name="SalesPerson" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[EmailAddress]"
-                      name="EmailAddress" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Phone]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Phone]"
-                      name="Phone" />
-                    <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CustomerIDSort]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CustomerID]"
-                      name="Copy of CustomerID" />
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CustomerIDSort]"
+                      name="CustomerIDSort"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CustomerID]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[NameStyle]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of NameStyle]"
-                      name="Copy of NameStyle" />
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[NameStyle]"
+                      name="NameStyle">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[NameStyle]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Title]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Title]"
-                      name="Copy of Title" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Title]"
+                      name="Title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Title]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[FirstName]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of FirstName]"
-                      name="Copy of FirstName" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[FirstName]"
+                      name="FirstName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FirstName]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[LastName]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of LastName]"
-                      name="Copy of LastName" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[LastName]"
+                      name="LastName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[LastName]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CompanyName]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of CompanyName]"
-                      name="Copy of CompanyName" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[CompanyName]"
+                      name="CompanyName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyName]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[SalesPerson]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of SalesPerson]"
-                      name="Copy of SalesPerson" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[SalesPerson]"
+                      name="SalesPerson">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[SalesPerson]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[EmailAddress]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of EmailAddress]"
-                      name="Copy of EmailAddress" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[EmailAddress]"
+                      name="EmailAddress">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[EmailAddress]}</property>
+                      </properties>
+                    </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]"
+                      refId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Phone]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
-                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[Copy of Phone]"
-                      name="Copy of Phone" />
+                      length="50"
+                      lineageId="Package\Data Flow Task\Sort 2.Outputs[Sort Output].Columns[Phone]"
+                      name="Phone">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Phone]}</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -2084,7 +2578,7 @@
           <paths>
             <path
               refId="Package\Data Flow Task.Paths[Data Conversion Output]"
-              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 1]"
+              endId="Package\Data Flow Task\Sort 1.Inputs[Sort Input]"
               name="Data Conversion Output"
               startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
             <path
@@ -2099,19 +2593,29 @@
               startId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Flat File Source Output]"
-              endId="Package\Data Flow Task\Union All.Inputs[Union All Input 2]"
+              endId="Package\Data Flow Task\Sort 2.Inputs[Sort Input]"
               name="Flat File Source Output"
               startId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Merge Output 1]"
+              endId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]"
+              name="Merge Output 1"
+              startId="Package\Data Flow Task\Merge.Outputs[Merge Output 1]" />
             <path
               refId="Package\Data Flow Task.Paths[Sort Output]"
               endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
               name="Sort Output"
               startId="Package\Data Flow Task\Sort.Outputs[Sort Output]" />
             <path
-              refId="Package\Data Flow Task.Paths[Union All Output 1]"
-              endId="Package\Data Flow Task\Derived Column 1.Inputs[Derived Column Input]"
-              name="Union All Output 1"
-              startId="Package\Data Flow Task\Union All.Outputs[Union All Output 1]" />
+              refId="Package\Data Flow Task.Paths[Sort Output1]"
+              endId="Package\Data Flow Task\Merge.Inputs[Merge Input 2]"
+              name="Sort Output"
+              startId="Package\Data Flow Task\Sort 2.Outputs[Sort Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Sort Output2]"
+              endId="Package\Data Flow Task\Merge.Inputs[Merge Input 1]"
+              name="Sort Output"
+              startId="Package\Data Flow Task\Sort 1.Outputs[Sort Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2140,124 +2644,102 @@
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="144,42"
-          Id="Package\Data Flow Task\Excel Source"
-          TopLeft="164,259" />
+          Size="167,42"
+          Id="Package\Data Flow Task\Derived Column 1"
+          TopLeft="543,393" />
         <NodeLayout
           Size="156,42"
           Id="Package\Data Flow Task\Flat File Source"
-          TopLeft="403,263" />
+          TopLeft="405,124" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Data Flow Task\Sort 1"
+          TopLeft="189,315" />
         <NodeLayout
           Size="158,42"
           Id="Package\Data Flow Task\Derived Column"
-          TopLeft="299,693" />
+          TopLeft="342,548" />
         <NodeLayout
-          Size="161,42"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="163,362" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Excel Source Output]"
-          TopLeft="239.75,301">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61"
-              Start="0,0"
-              End="0,53.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="123,42"
-          Id="Package\Data Flow Task\Union All"
-          TopLeft="311,482" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="243.5,404">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="129,78"
-              Start="0,0"
-              End="129,70.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,35"
-                    Point2="0,39"
-                    Point3="4,39" />
-                  <mssgle:LineSegment
-                    End="125,39" />
-                  <mssgle:CubicBezierSegment
-                    Point1="125,39"
-                    Point2="129,39"
-                    Point3="129,43" />
-                  <mssgle:LineSegment
-                    End="129,70.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="481,305">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-89.3333333333334,177"
-              Start="0,0"
-              End="-89.3333333333334,169.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,100.836276083467" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,100.836276083467"
-                    Point2="0,104.836276083467"
-                    Point3="-4,104.836276083467" />
-                  <mssgle:LineSegment
-                    End="-85.3333333333334,104.836276083467" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-85.3333333333334,104.836276083467"
-                    Point2="-89.3333333333334,104.836276083467"
-                    Point3="-89.3333333333334,108.836276083467" />
-                  <mssgle:LineSegment
-                    End="-89.3333333333334,169.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="144,42"
+          Id="Package\Data Flow Task\Excel Source"
+          TopLeft="166,128" />
         <NodeLayout
           Size="99,42"
           Id="Package\Data Flow Task\Sort"
-          TopLeft="328,582" />
+          TopLeft="371,437" />
+        <NodeLayout
+          Size="110,42"
+          Id="Package\Data Flow Task\Merge"
+          TopLeft="364,315" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="165,231" />
+        <NodeLayout
+          Size="108,42"
+          Id="Package\Data Flow Task\Sort 2"
+          TopLeft="426,212" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output2]"
+          TopLeft="297,336">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67,0"
+              Start="0,0"
+              End="59.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Sort Output1]"
+          TopLeft="480,254">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-61,61"
+              Start="0,0"
+              End="-61,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="-4,30.5" />
+                  <mssgle:LineSegment
+                    End="-57,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-57,30.5"
+                    Point2="-61,30.5"
+                    Point3="-61,34.5" />
+                  <mssgle:LineSegment
+                    End="-61,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Sort Output]"
-          TopLeft="377.75,624">
+          TopLeft="420.75,479">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2279,36 +2761,76 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="167,42"
-          Id="Package\Data Flow Task\Derived Column 1"
-          TopLeft="500,538" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Union All Output 1]"
-          TopLeft="434,503">
+          Id="Package\Data Flow Task.Paths[Merge Output 1]"
+          TopLeft="419,357">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="66,56"
+              EndConnector="207.5,36"
               Start="0,0"
-              End="58.5,56">
+              End="207.5,28.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="29,0" />
+                    End="0,14" />
                   <mssgle:CubicBezierSegment
-                    Point1="29,0"
-                    Point2="33,0"
-                    Point3="33,4" />
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="4,18" />
                   <mssgle:LineSegment
-                    End="33,52" />
+                    End="203.5,18" />
                   <mssgle:CubicBezierSegment
-                    Point1="33,52"
-                    Point2="33,56"
-                    Point3="37,56" />
+                    Point1="203.5,18"
+                    Point2="207.5,18"
+                    Point3="207.5,22" />
                   <mssgle:LineSegment
-                    End="58.5,56" />
+                    End="207.5,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="481.5,166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="241.75,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2319,7 +2841,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="500,564.666666666667">
+          TopLeft="543,419.666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2330,19 +2852,41 @@
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-26.8073394495413,0" />
+                    End="-26.8073394495414,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="-26.8073394495413,0"
-                    Point2="-30.8073394495413,0"
-                    Point3="-30.8073394495413,4" />
+                    Point1="-26.8073394495414,0"
+                    Point2="-30.8073394495414,0"
+                    Point3="-30.8073394495414,4" />
                   <mssgle:LineSegment
-                    End="-30.8073394495413,34.3333333333334" />
+                    End="-30.8073394495414,34.3333333333334" />
                   <mssgle:CubicBezierSegment
-                    Point1="-30.8073394495413,34.3333333333334"
-                    Point2="-30.8073394495413,38.3333333333334"
-                    Point3="-34.8073394495413,38.3333333333334" />
+                    Point1="-30.8073394495414,34.3333333333334"
+                    Point2="-30.8073394495414,38.3333333333334"
+                    Point3="-34.8073394495414,38.3333333333334" />
                   <mssgle:LineSegment
                     End="-65.5,38.3333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="244.25,273">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
